@@ -1,6 +1,7 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl } from '@umijs/max';
+import { FormattedMessage, useIntl, useModel } from '@umijs/max';
 import { Alert, Card, Typography } from 'antd';
+import { useAccess } from 'umi';
 import React from 'react';
 import styles from './Welcome.less';
 
@@ -14,6 +15,8 @@ const CodePreview: React.FC = ({ children }) => (
 
 const Welcome: React.FC = () => {
   const intl = useIntl();
+  const { initialState } = useModel('@@initialState');
+  const access = useAccess();
 
   return (
     <PageContainer>
@@ -40,7 +43,9 @@ const Welcome: React.FC = () => {
             <FormattedMessage id="pages.welcome.link" defaultMessage="Welcome" />
           </a>
         </Typography.Text>
+        {initialState?.currentUser?.access}
         <CodePreview>yarn add @ant-design/pro-components</CodePreview>
+        {JSON.stringify(access)}
       </Card>
     </PageContainer>
   );

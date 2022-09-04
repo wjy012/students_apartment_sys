@@ -9,6 +9,57 @@ const waitTime = (time: number = 100) => {
 };
 
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
+const route = [
+  {
+    path: '/user',
+    layout: false,
+    routes: [
+      {
+        name: 'login',
+        path: '/user/login',
+        component: './User/Login',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    icon: 'smile',
+    component: './Welcome',
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    icon: 'crown',
+    routes: [
+      {
+        path: '/admin/sub-page',
+        name: 'sub-page',
+        icon: 'smile',
+        component: './Welcome',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    name: 'list.table-list',
+    icon: 'table',
+    path: '/list',
+    component: './TableList',
+  },
+  {
+    path: '/',
+    redirect: '/welcome',
+  },
+  {
+    component: './404',
+  },
+];
 
 /**
  * 当前用户的权限，如果为空代表没登录
@@ -46,32 +97,6 @@ export default {
         signature: '海纳百川，有容乃大',
         title: '交互专家',
         group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
-        tags: [
-          {
-            key: '0',
-            label: '很有想法的',
-          },
-          {
-            key: '1',
-            label: '专注设计',
-          },
-          {
-            key: '2',
-            label: '辣~',
-          },
-          {
-            key: '3',
-            label: '大长腿',
-          },
-          {
-            key: '4',
-            label: '川妹子',
-          },
-          {
-            key: '5',
-            label: '海纳百川',
-          },
-        ],
         notifyCount: 12,
         unreadCount: 11,
         country: 'China',
@@ -131,15 +156,6 @@ export default {
         currentAuthority: 'user',
       });
       access = 'user';
-      return;
-    }
-    if (type === 'mobile') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
-      });
-      access = 'admin';
       return;
     }
 

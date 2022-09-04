@@ -49,6 +49,17 @@ declare namespace API {
     progress?: number;
   };
 
+  type StudentList = {
+    stuId?: string;
+    dormId?: string;
+    stuName?: string;
+    stuSex?: string;
+    stuAge?: number;
+    major?: string;
+    faculty?: string;
+    grade?: number;
+  };
+
   type RuleList = {
     data?: RuleListItem[];
     /** 列表的内容总数 */
