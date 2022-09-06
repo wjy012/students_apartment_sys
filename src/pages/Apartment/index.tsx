@@ -2,6 +2,7 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import React, { useRef, useState } from 'react';
 import InfoDrawer from './components/UpdateForm';
+import { dormList } from '@/services/apartments';
 
 const test: API.DormList[] = [
   {
@@ -38,6 +39,7 @@ const Apartment: React.FC = () => {
       title: '楼层',
       dataIndex: 'dormFloor',
       hideInForm: true,
+      valueType: 'digit',
     },
     {
       title: '宿舍类型',
@@ -45,9 +47,11 @@ const Apartment: React.FC = () => {
       hideInForm: true,
     },
     {
-      title: '已入住人数',
+      title: '剩余床位',
+      dataIndex: 'dormRemainder',
       hideInForm: true,
       search: false,
+      valueType: 'digit',
     },
     {
       title: '是否满员',
@@ -82,14 +86,14 @@ const Apartment: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.StudentList, API.PageParams>
+      <ProTable<API.DormList, API.PageParams>
         headerTitle="宿舍列表"
         actionRef={actionRef}
         rowKey="dormId"
         search={{
           labelWidth: 120,
         }}
-        //  request={studentList}
+        // request={dormList}
         columns={columns}
         dataSource={test}
       />

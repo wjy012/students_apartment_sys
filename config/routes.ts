@@ -36,6 +36,11 @@
         component: './System/Authorization',
       },
       {
+        path: '/system/dormConfig',
+        name: 'dormConfig',
+        component: './System/DormConfig',
+      },
+      {
         path: '/system/approval',
         name: 'approval',
         component: './System/Review',

@@ -12,13 +12,24 @@ export async function dormList(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.DormList>('/student/get', {
+  const res = await request('/dorm/getAll', {
     method: 'GET',
     params: {
       ...params,
     },
     ...(options || {}),
   });
+  console.log(res);
+  return { data: res.data.list };
+}
+
+export async function dormDetail(dormId: string) {
+  const res = await request('dorm/get', {
+    method: 'GET',
+    params: { dormId },
+  });
+  console.log('dormDetail', res);
+  return;
 }
 
 export async function checkIn(data: CheckInData) {

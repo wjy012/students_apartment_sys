@@ -68,13 +68,19 @@ declare namespace API {
   };
 
   type DormList = {
-    dormId?: string;
+    dormId: string;
     dormTotal?: number;
     dormRemainder?: number;
     dormType?: string;
     dormFloor?: string;
     buildingNumber?: number;
     isFull?: boolean;
+  };
+
+  type FeeItem = {
+    stuId: string;
+    water: number;
+    electricity: number;
   };
 
   type RuleList = {

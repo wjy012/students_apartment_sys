@@ -4,6 +4,7 @@ export default {
   'menu.system': '系统管理',
   'menu.system.approval': '出入审核',
   'menu.system.authorization': '用户管理',
+  'menu.system.dormConfig': '宿舍配置',
   'menu.system.attendance': '考勤管理',
 
   'menu.apartment': '住宿管理',
