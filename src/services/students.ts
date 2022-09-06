@@ -1,19 +1,20 @@
 import { request } from '@umijs/max';
 
 export async function studentList(
-  params: {
-    current?: number;
+  params?: {
+    currentPage?: number;
     pageSize?: number;
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.StudentList>('/student/get', {
+  const res = await request('/student/get', {
     method: 'GET',
     params: {
       ...params,
     },
     ...(options || {}),
   });
+  return { data: res.data.list };
 }
 
 export async function addStudent(data: API.StudentList) {
@@ -23,17 +24,16 @@ export async function addStudent(data: API.StudentList) {
   });
 }
 
-export async function updateStudent(options?: { [key: string]: any }) {
+export async function updateStudent(data?: { [key: string]: any }) {
   return request<API.StudentList>('/student/update', {
     method: 'POST',
-    data: { ...options },
-    ...(options || {}),
+    data,
   });
 }
 
-export async function deleteStudent(options?: { [key: string]: any }) {
+export async function deleteStudent(data?: { [key: string]: any }) {
   return request<API.StudentList>('/student/delete', {
     method: 'POST',
-    ...(options || {}),
+    data: data?.stuId,
   });
 }

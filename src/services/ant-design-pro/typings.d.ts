@@ -30,7 +30,7 @@ declare namespace API {
   };
 
   type PageParams = {
-    current?: number;
+    currentPage?: number;
     pageSize?: number;
   };
 
@@ -49,6 +49,13 @@ declare namespace API {
     progress?: number;
   };
 
+  type UserInfo = {
+    userName: string;
+    password?: string;
+    userType: string;
+    userId?: number;
+  };
+
   type StudentList = {
     stuId?: string;
     dormId?: string;
@@ -58,6 +65,16 @@ declare namespace API {
     major?: string;
     faculty?: string;
     grade?: number;
+  };
+
+  type DormList = {
+    dormId?: string;
+    dormTotal?: number;
+    dormRemainder?: number;
+    dormType?: string;
+    dormFloor?: string;
+    buildingNumber?: number;
+    isFull?: boolean;
   };
 
   type RuleList = {

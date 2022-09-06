@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8000/"
+      "url": "http://localhost:8080/"
     },
     {
       "url": "https://localhost:8000/"
@@ -171,7 +171,7 @@
         "operationId": "rule",
         "parameters": [
           {
-            "name": "current",
+            "name": "currentPage",
             "in": "query",
             "description": "当前的页码",
             "schema": {

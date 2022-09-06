@@ -80,22 +80,6 @@
     component: './Report',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    routes: [
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  {
     name: 'list.table-list',
     icon: 'table',
     path: '/list',

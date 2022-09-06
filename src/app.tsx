@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
+import type { RequestConfig } from '@umijs/max';
 import { history } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
@@ -40,6 +41,30 @@ export async function getInitialState(): Promise<{
     settings: defaultSettings,
   };
 }
+
+export const request: RequestConfig = {
+  requestInterceptors: [
+    (url, options) => {
+      if (
+        url !== '/api/login/account' &&
+        url !== '/api/login/outLogin' &&
+        url !== '/api/currentUser'
+      ) {
+        if (options?.params?.current) {
+          const {
+            params: { current },
+          } = options;
+          delete options.params.current;
+          options.params.currentPage = current;
+        }
+        return {
+          url: `http://localhost:8080${url}`,
+          options,
+        };
+      } else return { url, options };
+    },
+  ],
+};
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {

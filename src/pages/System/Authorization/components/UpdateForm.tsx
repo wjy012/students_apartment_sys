@@ -1,44 +1,24 @@
 import { ModalForm, ProFormRadio, ProFormText } from '@ant-design/pro-components';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRef } from 'react';
 import { message } from 'antd';
 import type { ProFormInstance } from '@ant-design/pro-components';
-import { addStudent, updateStudent } from '@/services/students';
-
-export type FormValueType = {
-  stuId?: string;
-  dormId?: string;
-  stuName?: string;
-  stuSex?: string;
-} & Partial<API.StudentList>;
+import { addUser } from '@/services/system/authorization';
 
 export type UpdateFormProps = {
   shouldUpdate: () => void;
   onCancel: any;
   updateModalVisible: boolean;
-  values: Partial<API.StudentList>;
-  type: string;
 };
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
-  const { onCancel, type, updateModalVisible, values, shouldUpdate } = props;
+  const { onCancel, updateModalVisible, shouldUpdate } = props;
   const formRef = useRef<ProFormInstance>();
-
-  const initialForm = (value: API.StudentList) => {
-    formRef.current?.setFieldsValue({ ...value });
-  };
-
-  useEffect(() => {
-    if (updateModalVisible === true && type === '修改信息') {
-      initialForm(values);
-    }
-  }, [updateModalVisible]);
 
   return (
     <ModalForm
-      layout="horizontal"
       width="550px"
-      title={type}
+      title="添加用户"
       formRef={formRef}
       visible={updateModalVisible}
       onVisibleChange={(v) => {
@@ -51,9 +31,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         console.log(value);
         const hide = message.loading('正在操作中...');
         try {
-          let res: any;
-          if (type === '添加学生') res = await addStudent({ ...value });
-          else res = await updateStudent({ ...value });
+          const res = await addUser({ ...value });
           if (res.code === 200) {
             hide();
             message.success('操作成功！');
@@ -71,27 +49,23 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         }
       }}
     >
-      <ProFormText required width="md" name="stuId" label="学号" />
-      <ProFormText required width="md" name="stuName" label="姓名" />
+      <ProFormText required width="md" name="userName" label="用户名" />
+      <ProFormText.Password required width="md" name="password" label="密码" />
       <ProFormRadio.Group
-        name="stuSex"
-        label="性别"
+        name="userType"
+        label="用户权限"
         required
         options={[
           {
-            label: '男',
-            value: '男',
+            label: '系统管理员',
+            value: 'admin',
           },
           {
-            label: '女',
-            value: '女',
+            label: '宿舍管理员',
+            value: 'dorm',
           },
         ]}
       />
-      <ProFormText width="md" name="dormId" label="宿舍号" />
-      <ProFormText width="md" name="major" label="专 业" />
-      <ProFormText width="md" name="faculty" label="学 院" />
-      <ProFormText width="md" name="grade" label="年 级" />
     </ModalForm>
   );
 };

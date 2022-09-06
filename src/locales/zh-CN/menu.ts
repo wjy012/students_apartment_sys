@@ -3,10 +3,10 @@ export default {
   'menu.students': '学生管理',
   'menu.system': '系统管理',
   'menu.system.approval': '出入审核',
-  'menu.system.authorization': '权限设置',
+  'menu.system.authorization': '用户管理',
   'menu.system.attendance': '考勤管理',
 
-  'menu.apartment': '宿舍管理',
+  'menu.apartment': '住宿管理',
   'menu.service': '维修管理',
   'menu.utility': '水电费管理',
   'menu.discipline': '违纪管理',
