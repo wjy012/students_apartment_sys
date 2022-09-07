@@ -73,7 +73,7 @@ const Login: React.FC = () => {
           </Tabs>
 
           {status === 'error' && loginType === 'account' && (
-            <LoginMessage content="账户或密码错误(admin/ant.design)" />
+            <LoginMessage content="账户或密码错误" />
           )}
           <>
             <ProFormText
@@ -96,7 +96,7 @@ const Login: React.FC = () => {
                 size: 'large',
                 prefix: <LockOutlined className={styles.prefixIcon} />,
               }}
-              placeholder="密码: ant.design"
+              placeholder="123456"
               rules={[
                 {
                   required: true,

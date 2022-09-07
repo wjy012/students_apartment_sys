@@ -21,21 +21,21 @@ export async function studentList(
 }
 
 export async function addStudent(data: API.StudentList) {
-  return request<API.StudentList>('/student/add', {
+  return request('/student/add', {
     method: 'POST',
     data,
   });
 }
 
 export async function updateStudent(data?: { [key: string]: any }) {
-  return request<API.StudentList>('/student/update', {
+  return request('/student/update', {
     method: 'POST',
     data,
   });
 }
 
 export async function deleteStudent(data?: { [key: string]: any }) {
-  return request<API.StudentList>('/student/delete', {
+  return request('/student/delete', {
     method: 'POST',
     data: data?.stuId,
   });

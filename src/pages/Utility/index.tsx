@@ -6,7 +6,10 @@ import { message } from 'antd';
 
 const Utility: React.FC = () => {
   const actionRef = useRef<ProDescriptionsActionType>();
-  const [fee, setFee] = useState({});
+  const [fee, setFee] = useState({
+    waterPrice: 0,
+    electricPrice: 0,
+  });
   const getFee = async () => {
     const res = await getPrice();
     setFee(res);
@@ -25,7 +28,7 @@ const Utility: React.FC = () => {
     },
     {
       title: '用水量/吨',
-      dataIndex: 'waterNumber',
+      dataIndex: 'waterCost',
       search: false,
     },
     {
@@ -33,12 +36,12 @@ const Utility: React.FC = () => {
       search: false,
       valueType: 'money',
       renderText(_, record) {
-        return record.waterNumber * fee.waterPrice;
+        return record.waterCost * fee.waterPrice;
       },
     },
     {
       title: '用电量/度',
-      dataIndex: 'electricNumber',
+      dataIndex: 'electricCost',
       search: false,
     },
     {
@@ -46,17 +49,19 @@ const Utility: React.FC = () => {
       search: false,
       valueType: 'money',
       renderText(_, record) {
-        return record.electricNumber * fee.electricPrice;
+        return record.electricCost * fee.electricPrice;
       },
     },
     {
       title: '总应付金额',
-      // dataIndex: 'cost',
       search: false,
       valueType: 'money',
-      sorter: (a, b) => a.cost - b.cost,
+      sorter: (a, b) =>
+        a.waterCost * fee.waterPrice +
+        a.electricCost * fee.electricPrice -
+        (b.waterCost * fee.waterPrice + b.electricCost * fee.electricPrice),
       renderText(_, record) {
-        return record.waterNumber * fee.waterPrice + record.electricNumber * fee.electricPrice;
+        return record.waterCost * fee.waterPrice + record.electricCost * fee.electricPrice;
       },
     },
   ];

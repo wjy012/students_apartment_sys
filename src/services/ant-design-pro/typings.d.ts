@@ -86,9 +86,27 @@ declare namespace API {
 
   type FeeItem = {
     stuId: string;
-    waterNumber: number;
-    electricNumber: number;
+    waterCost: number;
+    electricCost: number;
     cost?: number;
+  };
+
+  type DisciplineItem = {
+    stuName: string;
+    stuId: string;
+    dormitoryNo?: string;
+    disciplinaryTime?: number;
+    disciplinaryInfo?: string;
+  };
+
+  type ServiceItem = {
+    id: string;
+    warrantyId?: string;
+    dormitoryNo: string;
+    isState?: string;
+    applicationTime?: number;
+    warrantyInfo?: string;
+    warrantyTime?: number;
   };
 
   type RuleList = {

@@ -4,17 +4,6 @@ import React, { useRef, useState } from 'react';
 import InfoDrawer from './components/UpdateForm';
 import { dormList } from '@/services/apartments';
 
-const test: API.DormList[] = [
-  {
-    dormId: 'II609',
-    dormFloor: '6F',
-    dormType: '14',
-    dormRemainder: 1,
-    dormTotal: 14,
-    buildingNumber: 11,
-  },
-];
-
 const Apartment: React.FC = () => {
   /**
    * @en-US The pop-up window of the distribution update window

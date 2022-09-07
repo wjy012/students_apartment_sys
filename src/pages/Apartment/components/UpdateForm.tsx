@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, message, Button, Drawer } from 'antd';
 import { dormDetail, checkIn, checkOut } from '@/services/apartments';
 import { flattenObj } from '@/utils/object';
-import type { DefaultOptionType } from 'antd/lib/select';
 
 export type UpdateFormProps = {
   onCancel: any;
@@ -64,7 +63,9 @@ const InfoDrawer: React.FC<UpdateFormProps> = (props) => {
     setStuData(stu);
   };
   useEffect(() => {
-    getStudentList(dorm.dormId);
+    if (dorm) {
+      getStudentList(dorm.dormId);
+    }
   }, [dorm]);
 
   const handleCheckIn = async (value: API.CheckInData) => {
