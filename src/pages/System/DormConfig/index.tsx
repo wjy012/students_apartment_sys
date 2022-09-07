@@ -4,8 +4,8 @@ import { FooterToolbar, PageContainer, ProTable } from '@ant-design/pro-componen
 import { Button, message } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import { studentList, deleteStudent } from '@/services/students';
-
+import { dormList } from '@/services/apartments';
+import { deleteDorm } from '@/services/system/dormConfig';
 /**
  *  Delete node
  * @zh-CN 删除节点
@@ -16,12 +16,18 @@ const handleRemove = async (selectedRows: API.DormList[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await deleteStudent({
-      stuId: selectedRows.map((row) => row.dormId),
+    const res = await deleteDorm({
+      dormId: selectedRows.map((row) => row.dormId),
     });
-    hide();
-    message.success('删除成功！');
-    return true;
+    if (res.code === 200) {
+      hide();
+      message.success('删除成功！');
+      return true;
+    } else {
+      hide();
+      message.warning(res.data.join(', ') + '有入住同学，无法删除！');
+      return false;
+    }
   } catch (error) {
     hide();
     message.error('删除失败，请稍后再试！');
@@ -66,19 +72,7 @@ const DormConfig: React.FC = () => {
       dataIndex: 'dormRemainder',
       hideInForm: true,
       search: false,
-    },
-    {
-      title: '是否满员',
-      hideInTable: true,
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: '是',
-        },
-        1: {
-          text: '否',
-        },
-      },
+      sorter: (a, b) => a.dormRemainder - b.dormRemainder,
     },
     {
       title: '操作',
@@ -121,10 +115,12 @@ const DormConfig: React.FC = () => {
             添加宿舍
           </Button>,
         ]}
-        request={studentList}
+        request={dormList}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
+            console.log(selectedRows);
+
             setSelectedRows(selectedRows);
           },
         }}

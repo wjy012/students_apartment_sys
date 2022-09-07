@@ -45,26 +45,22 @@ const Apartment: React.FC = () => {
       title: '宿舍类型',
       dataIndex: 'dormType',
       hideInForm: true,
+      valueEnum: {
+        男: {
+          text: '男',
+        },
+        女: {
+          text: '女',
+        },
+      },
     },
     {
       title: '剩余床位',
       dataIndex: 'dormRemainder',
+      sorter: (a, b) => a.dormRemainder - b.dormRemainder,
       hideInForm: true,
       search: false,
       valueType: 'digit',
-    },
-    {
-      title: '是否满员',
-      hideInTable: true,
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: '是',
-        },
-        1: {
-          text: '否',
-        },
-      },
     },
     {
       title: '操作',
@@ -93,9 +89,8 @@ const Apartment: React.FC = () => {
         search={{
           labelWidth: 120,
         }}
-        // request={dormList}
+        request={dormList}
         columns={columns}
-        dataSource={test}
       />
       <InfoDrawer
         onCancel={() => setInfoDrawerOpen(false)}

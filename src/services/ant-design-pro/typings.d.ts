@@ -65,6 +65,7 @@ declare namespace API {
     major?: string;
     faculty?: string;
     grade?: number;
+    bedId?: number;
   };
 
   type DormList = {
@@ -77,10 +78,17 @@ declare namespace API {
     isFull?: boolean;
   };
 
+  type CheckInData = {
+    dormId?: string;
+    stuId?: string;
+    bedId?: number;
+  };
+
   type FeeItem = {
     stuId: string;
-    water: number;
-    electricity: number;
+    waterNumber: number;
+    electricNumber: number;
+    cost?: number;
   };
 
   type RuleList = {

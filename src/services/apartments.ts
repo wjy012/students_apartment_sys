@@ -1,10 +1,5 @@
 import { request } from '@umijs/max';
 
-type CheckInData = {
-  dormId?: string;
-  stuId?: string[];
-};
-
 export async function dormList(
   params?: {
     currentPage?: number;
@@ -12,36 +7,34 @@ export async function dormList(
   },
   options?: { [key: string]: any },
 ) {
-  const res = await request('/dorm/getAll', {
+  const res = await request('/dorm/get', {
     method: 'GET',
     params: {
       ...params,
     },
     ...(options || {}),
   });
-  console.log(res);
   return { data: res.data.list };
 }
 
 export async function dormDetail(dormId: string) {
-  const res = await request('dorm/get', {
+  const res = await request('/live/get', {
     method: 'GET',
     params: { dormId },
   });
-  console.log('dormDetail', res);
-  return;
+  return res.data;
 }
 
-export async function checkIn(data: CheckInData) {
-  return request<CheckInData>('/student/add', {
+export async function checkIn(data: any) {
+  return request('/live/add', {
     method: 'POST',
     data,
   });
 }
 
-export async function checkOut(options?: { [key: string]: any }) {
-  return request<API.StudentList>('/student/delete', {
+export async function checkOut(data?: { [key: string]: any }) {
+  return request('/live/delete', {
     method: 'POST',
-    ...(options || {}),
+    data: data?.stuId,
   });
 }

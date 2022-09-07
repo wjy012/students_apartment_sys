@@ -1,4 +1,5 @@
 import { request } from '@umijs/max';
+import { flattenObj } from '@/utils/object';
 
 export async function studentList(
   params?: {
@@ -14,7 +15,9 @@ export async function studentList(
     },
     ...(options || {}),
   });
-  return { data: res.data.list };
+  const data = res.data.list.map((e: any) => flattenObj()(e));
+
+  return { data };
 }
 
 export async function addStudent(data: API.StudentList) {

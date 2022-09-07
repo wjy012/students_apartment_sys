@@ -48,7 +48,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         }
       }}
       onFinish={async (value) => {
-        console.log(value);
         const hide = message.loading('正在操作中...');
         try {
           let res: any;

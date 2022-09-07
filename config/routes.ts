@@ -78,18 +78,12 @@
     icon: 'warning',
     component: './Discipline',
   },
-  {
-    path: '/report',
-    name: 'report',
-    icon: 'AreaChart',
-    component: './Report',
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
+  // {
+  //   path: '/report',
+  //   name: 'report',
+  //   icon: 'AreaChart',
+  //   component: './Report',
+  // },
   {
     path: '/',
     redirect: '/welcome',
