@@ -63,10 +63,10 @@ const InfoDrawer: React.FC<UpdateFormProps> = (props) => {
     setStuData(stu);
   };
   useEffect(() => {
-    if (dorm) {
+    if (infoDrawerOpen) {
       getStudentList(dorm.dormId);
     }
-  }, [dorm]);
+  }, [infoDrawerOpen]);
 
   const handleCheckIn = async (value: API.CheckInData) => {
     const hide = message.loading('正在操作中');

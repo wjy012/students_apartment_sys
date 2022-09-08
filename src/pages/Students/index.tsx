@@ -24,7 +24,7 @@ const handleRemove = async (selectedRows: API.StudentList[]) => {
     return true;
   } catch (error) {
     hide();
-    message.error('删除失败，请稍后再试！');
+    message.error('同学当前有住宿，无法删除！');
     return false;
   }
 };

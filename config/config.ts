@@ -20,9 +20,9 @@ export default defineConfig({
     title: '学生宿舍管理系统',
     ...defaultSettings,
   },
-  targets: {
-    ie: 11,
-  },
+  // targets: {
+  //   ie: 11,
+  // },
   // umi routes: https://umijs.org/docs/routing
   routes,
   access: {},
